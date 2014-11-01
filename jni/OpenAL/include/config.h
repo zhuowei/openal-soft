@@ -17,8 +17,6 @@
 #define HAVE_OPENSLES 1
 #endif
 
-#define HAVE_AUDIOTRACK 1
-
 // For throttling AlSource.c
 
 #ifndef MAX_SOURCES_LOW

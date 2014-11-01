@@ -1,8 +1,8 @@
-ifeq ("$(ROOTDIR)","")
+#ifeq ("$(ROOTDIR)","")
     LOCAL_PATH := $(call my-dir)
-else
-    LOCAL_PATH := $(ROOTDIR)
-endif
+#else
+#    LOCAL_PATH := $(ROOTDIR)
+#endif
 
 ANALYZE      ?= no
 ANALYZE_OUTPUT?=/dev/null
@@ -13,7 +13,8 @@ LOCAL_LDLIBS     := -llog
 LOCAL_MODULE     := openal
 LOCAL_ARM_MODE   := arm
 CLANG_VERSION    ?= 3.1
-ROOTDIR          ?= $(LOCAL_PATH)
+#ROOTDIR          ?= $(LOCAL_PATH)
+ROOTDIR          := $(LOCAL_PATH)
 OPENAL_DIR       := OpenAL
 MODULE           := openal
 MODULE_DST       := obj/local/$(TARGET_ARCH_ABI)/objs/openal
@@ -82,24 +83,15 @@ LOCAL_SRC_FILES :=  \
 
 
 # If building for versions after FROYO
-ifeq ($(POST_FROYO), yes)
-  LOCAL_CFLAGS +=   -DPOST_FROYO -I$(ANDROID_NDK_ROOT)/platforms/android-9/arch-arm/usr/include/
-  LOCAL_LDLIBS += -ldl -L$(ANDROID_NDK_ROOT)/platforms/android-9/arch-arm/usr/lib/
-  LOCAL_SRC_FILES += $(OPENAL_DIR)/Alc/opensles.c
-endif
+#ifeq ($(POST_FROYO), yes)
+#  LOCAL_CFLAGS +=   -DPOST_FROYO -I$(ANDROID_NDK_ROOT)/platforms/android-9/arch-arm/usr/include/
+#  LOCAL_LDLIBS += -ldl -L$(ANDROID_NDK_ROOT)/platforms/android-9/arch-arm/usr/lib/
+#  LOCAL_SRC_FILES += $(OPENAL_DIR)/Alc/opensles.c
+#endif
 
-
-
-
-
-
-
-
-
-
-
-
-
+LOCAL_CFLAGS += -DPOST_FROYO -DRELEASE_LOG=
+LOCAL_LDLIBS += -ldl
+LOCAL_SRC_FILES += $(OPENAL_DIR)/Alc/opensles.c
 
 include $(BUILD_SHARED_LIBRARY)
 
